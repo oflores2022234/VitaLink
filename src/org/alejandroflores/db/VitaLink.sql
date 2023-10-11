@@ -146,6 +146,65 @@ Create table Login (
 );
 
 
+##########################################################################################
+##########################################################################################
+##########################################################################################
+#################################PART OF STORED PROCEDURE#################################
+##########################################################################################
+##########################################################################################
+
+
+/*##############STORED PROCEDURES SPECIALITYES###############*/
+Delimiter $$
+	Create procedure sp_AddSpeciality(in idSpeciality int, in nameSpeciality varchar(150))
+		Begin
+			Insert into Specialityes(idSpeciality, nameSpeciality)
+				values(idSpeciality, nameSpeciality);
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_ListSpeciality()
+		Begin
+			Select 
+				S.idSpeciality,
+                S.nameSpeciality
+                from Specialityes S;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_SearchSpeciality(in specialityId int)
+		Begin
+			Select 
+				S.idSpeciality,
+                S.nameSpeciality
+                from Specialityes S where S.idSpeciality = specialityId;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_DeleteSpeciality(in specialityId int)
+		Begin
+			Delete from Specialityes 
+				where idSpeciality = specialityId;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_UpdateSpeciality(in specialityId int, in specialityName varchar(150))
+		Begin
+			Update Specialityes S
+				Set S.nameSpeciality = specialityName
+                where S.idSpeciality = specialityId;
+        End$$
+Delimiter ;
+
+
+/*##############STORED PROCEDURES PHARMACEUTICALS###############*/
+
+
+
 
 
 
