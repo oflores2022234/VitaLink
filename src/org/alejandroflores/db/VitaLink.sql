@@ -259,7 +259,76 @@ Delimiter $$
 Delimiter ;
 
 
+/*##############STORED PROCEDURES PATIENTS###############*/
 
+Delimiter $$
+	Create procedure sp_AddPatient(in namePatient varchar(150), in lastNamePatient varchar(150),
+			in dateOfBirth date, in genderPatient char(1), in addressPatient varchar(150),
+			in phonePatient varchar(8), in emailPatient varchar(150))
+        Begin
+			Insert into Patients(namePatient, lastNamePatient, dateOfBirth, genderParient, addressPatient, phonePatient, emailPatient)
+				values(namePatient, lastNamePatient, dateOfBirth, genderParient, addressPatient, phonePatient, emailPatient);
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_ListPatients()
+		Begin
+			Select
+				Pa.idPatient,
+                Pa.namePatient,
+                Pa.lastNamePatient,
+                Pa.dateOfBirth,
+                Pa.genderPatient,
+                Pa.addressPatient,
+                Pa.phonePatient,
+                Pa.emailPatient
+                from Patients Pa;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_SearchPatient(in patientId int)
+		Begin
+			Select
+				Pa.idPatient,
+                Pa.namePatient,
+                Pa.lastNamePatient,
+                Pa.dateOfBirth,
+                Pa.genderPatient,
+                Pa.addressPatient,
+                Pa.phonePatient,
+                Pa.emailPatient
+                from Patients Pa where Pa.idPatient = patientId;	
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_DelimiterPatient(in patientId int)
+		Begin
+			Delete from Patients
+				where idPatient = patientId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_UpdatePatient(in patientId int,in patientName varchar(150), in patientLastName varchar(150),
+				in birthDay date, in patientGender char(1), in patientAddress varchar(150),
+				in patientPhone varchar(8), in patientEmail varchar(150))
+		Begin
+			Update Patients Pa
+				Set Pa.namePatient = patientName,
+                Pa.lastNamePatient = patientLastName,
+                Pa.dateOfBirth = birthDay,
+                Pa.genderPatient = patientGender,
+                Pa.addressPatient = patientAddress,
+                Pa.phonePatient = patientPhone,
+                Pa.emailPatient = patientEmail
+                where Pa.idPatient = patientId;
+        End$$
+Delimiter ;
 
 
 
