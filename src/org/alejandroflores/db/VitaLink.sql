@@ -248,7 +248,7 @@ Delimiter ;
 
 Delimiter $$
 	Create procedure sp_UpdatePharmaceutical(in pharmaceuticalId int, in pharmaceuticalName varchar(150),
-					in pharmaceuticalAddress varchar(150), in pharmaceuticalPhone varchar(8))
+						in pharmaceuticalAddress varchar(150), in pharmaceuticalPhone varchar(8))
 		Begin
 			Update Pharmaceuticals P
 				Set P.namePharmaceutical = pharmaceuticalName,
