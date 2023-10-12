@@ -330,6 +330,65 @@ Delimiter $$
         End$$
 Delimiter ;
 
+/*##############STORED PROCEDURES MEDICATIONS###############*/
+
+Delimiter $$
+	Create procedure sp_AddMedication(in nameMedication varchar(150), in descriptionMedication varchar(200),
+				in idPharmaceutical int)
+		Begin
+			Insert into Medications(nameMedication, descriptionMedication, idPharmaceutical)
+				values(nameMedication, descriptionMedication, idPharmaceutical);
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_ListMedications()
+		Begin
+			Select
+				M.idMedication,
+                M.nameMedication,
+                M.descriptionMedication,
+                M.idPharmaceutical
+                from Medications M;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_SearchMedication(in medicationId int)
+		Begin
+			Select
+				M.idMedication,
+                M.nameMedication,
+                M.descriptionMedication,
+                M.idPharmaceutical
+                from Medications M where M.idMedication = medicationId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_DeleteMedication(in medicationId int)
+		Begin
+			Delete from Medications
+				where idMedication = medicationId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_UpdateMedication(in medicationId int,in medicationName varchar(150),
+				in medicationDescription varchar(200), in pharmaceuticalId int)
+		Begin
+			Update Medications M
+				Set M.nameMedication = medicationName,
+                M.descriptionMedication = medicationDescription,
+                M.idPharmaceutical = pharmaceuticalId
+                where M.idMedication = medicationId;
+        End$$
+Delimiter ;
+
+
 
 
 
