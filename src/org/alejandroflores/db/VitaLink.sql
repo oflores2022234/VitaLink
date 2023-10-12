@@ -156,10 +156,10 @@ Create table Login (
 
 /*##############STORED PROCEDURES SPECIALITYES###############*/
 Delimiter $$
-	Create procedure sp_AddSpeciality(in idSpeciality int, in nameSpeciality varchar(150))
+	Create procedure sp_AddSpeciality(in nameSpeciality varchar(150))
 		Begin
-			Insert into Specialityes(idSpeciality, nameSpeciality)
-				values(idSpeciality, nameSpeciality);
+			Insert into Specialityes(nameSpeciality)
+				values(nameSpeciality);
         End$$
 Delimiter ;
 
@@ -202,6 +202,63 @@ Delimiter ;
 
 
 /*##############STORED PROCEDURES PHARMACEUTICALS###############*/
+
+Delimiter $$
+	Create procedure sp_addPharmaceutical(in namePharmaceutical varchar(150),
+						in addressPharmaceutical varchar(150), in phonePharmaceutical varchar(8))
+		Begin
+			Insert into Pharmaceuticals (namePharmaceutical, addressPharmaceutical, phonePharmaceutical)
+				values(namePharmaceutical, addressPharmaceutical, phonePharmaceutical);
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+		Create procedure sp_ListPharmaceuticals()
+			Begin
+				Select
+					P.idPharmaceutical,
+                    P.namePharmaceutical,
+                    P.addressPharmaceutical,
+                    P.phonePharmaceutical
+                    from Pharmaceuticals P;
+            End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_SearchPharmaceutical(in pharmaceuticalId int)
+		Begin
+			Select 
+				P.idPharmaceutical,
+				P.namePharmaceutical,
+				P.addressPharmaceutical,
+				P.phonePharmaceutical
+				from Pharmaceuticals P where P.idPharmaceutical = pharmaceuticalId;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_DeletePharmaceutical(in pharmaceuticalId int)
+		Begin
+			Delete from Pharmaceuticals
+				where idPharmaceutical = pharmaceuticalId;
+        End$$
+Delimiter ;
+
+Delimiter $$
+	Create procedure sp_UpdatePharmaceutical(in pharmaceuticalId int, in pharmaceuticalName varchar(150),
+					in pharmaceuticalAddress varchar(150), in pharmaceuticalPhone varchar(8))
+		Begin
+			Update Pharmaceuticals P
+				Set P.namePharmaceutical = pharmaceuticalName,
+                P.addressPharmaceutical = pharmaceuticalAddress,
+                P.phonePharmaceutical = pharmaceuticalName
+                where P.idPharmaceutical = pharmaceuticalId;
+        End$$
+Delimiter ;
+
+
 
 
 
