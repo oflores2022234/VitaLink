@@ -473,7 +473,76 @@ Delimiter $$
 Delimiter ;
 
 
+/*##############STORED PROCEDURES PRESCRIPTIONS###############*/
 
+Delimiter $$
+	Create procedure sp_AddPrescription(in idDoctor int, in idPatient int,in idMedication int, 
+			in quantityMedication int, in datePrescription date, in instructions varchar(200))
+		Begin
+			Insert into Prescriptions(idDoctor, idPatient, idMedication, quantityMedication,
+				datePrescription, instructions)
+				values(idDoctor, idPatient, idMedication, quantityMedication,
+				datePrescription, instructions);
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_ListPrescriptions()
+		Begin
+			Select
+				Pre.idPrescription,
+                Pre.idDoctor,
+                Pre.idPatient,
+                Pre.idMedication,
+                Pre.quantityMedication,
+                Pre.datePrescription,
+                Pre.instructions
+                from Prescriptions Pre;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_SearchPrescription(in prescriptionId int)
+		Begin
+			Select
+				Pre.idPrescription,
+                Pre.idDoctor,
+                Pre.idPatient,
+                Pre.idMedication,
+                Pre.quantityMedication,
+                Pre.datePrescription,
+                Pre.instructions
+                from Prescriptions Pre where Pre.idPrescription = prescriptionId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_DeletePrescription(in prescriptionId int)
+		Begin
+			Delete from Prescriptions
+				where idPrescription = prescriptionId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_UpdatePrescription(in prescriptionId int,in doctorId int, in patientId int,
+			in medicationId int, in medicationQuantity int, in prescriptionDate date, 
+			in instructionss varchar(200))
+		Begin
+			Update Prescriptions Pre
+				Set Pre.idDoctor = doctorId,
+                Pre.idPatient = patientId,
+                Pre.idMedication = medicationId,
+                Pre.quantityMedication = medicationQuantity,
+                Pre.datePrescription = prescriptionDate,
+                Pre.instructions = instructionss
+				where Pre.idPrescription = prescriptionId;
+        End$$
+Delimiter ;
 
 
 
