@@ -389,7 +389,88 @@ Delimiter $$
 Delimiter ;
 
 
+/*##############STORED PROCEDURES DOCTORS###############*/
 
+Delimiter $$
+	Create procedure sp_AddDoctor(in licenseDoctor varchar(20), in nameDoctor varchar(150),
+			in lastNameDoctor varchar(150), in idSpeciality int, in dateOfBirth date,
+			in genderDoctor char(1), in addressDoctor varchar(150),
+            in phoneDoctor varchar(8), in emailDoctor varchar(150))
+		Begin
+			Insert into Doctors(licenseDoctor, nameDoctor, lastNameDoctor, idSpeciality,
+								dateOfBirth, genderDoctor, addressDoctor, phoneDoctor, emailDoctor)
+				values (licenseDoctor, nameDoctor, lastNameDoctor, idSpeciality,
+								dateOfBirth, genderDoctor, addressDoctor, phoneDoctor, emailDoctor);
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_ListDoctor()
+		Begin
+			Select
+				D.idDoctor,
+                D.licenseDoctor,
+                D.nameDoctor,
+                D.lastNameDoctor,
+                D.idSpeciality,
+                D.dateOfBirth,
+                D.genderDoctor,
+                D.addressDoctor,
+                D.phoneDoctor,
+                D.emailDoctor
+                from Doctors D;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_SearchDoctor(in doctorId int)
+		Begin
+			Select
+				D.idDoctor,
+                D.licenseDoctor,
+                D.nameDoctor,
+                D.lastNameDoctor,
+                D.idSpeciality,
+                D.dateOfBirth,
+                D.genderDoctor,
+                D.addressDoctor,
+                D.phoneDoctor,
+                D.emailDoctor
+                from Doctors D where D.idDoctor = doctorId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_DeleteDoctor(in doctorId int)
+		Begin
+			Delete from Doctors
+				where idDoctor = doctorId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_UpdateDoctor(in doctorId int ,in doctorLicense varchar(20), in doctorName varchar(150),
+			in doctorLastName varchar(150), in specialityId int, in birthDay date,
+			in doctorGender char(1), in doctorAddress varchar(150),
+            in doctorPhone varchar(8), in doctorEmail varchar(150))
+		Begin
+			Update Doctors D
+				Set D.licenseDoctor = doctorLicense,
+                D.nameDoctor = doctorName,
+                D.lastNameDoctor = doctorLastName,
+                D.idSpeciality = specialityId,
+                D.dateOfBirth = birthDay,
+                D.genderDoctor = doctorGender,
+                D.addressDoctor = doctorAddress,
+                D.phoneDoctor = doctorPhone,
+                D.emailDoctor = doctorEmail
+                where D.idDoctor = doctorId;
+        End$$
+Delimiter ;
 
 
 
