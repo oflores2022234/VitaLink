@@ -544,8 +544,60 @@ Delimiter $$
         End$$
 Delimiter ;
 
+/*##############STORED PROCEDURES PAYMENT-METHODS###############*/
+
+Delimiter $$
+	Create procedure sp_AddPaymentMethod(in nameMethod varchar(150), in descriptionMethod varchar(150))
+		Begin
+			Insert into PaymentMethods(nameMethod, descriptionMethod)
+				values(nameMethod, descriptionMethod);
+        End$$
+Delimiter ;
 
 
+Delimiter $$
+	Create procedure sp_ListPaymentMethods()
+		Begin
+			Select
+				Pm.idPaymentMethod,
+                Pm.nameMethod,
+                Pm.descriptionMethod
+                from PaymentMethods Pm;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_SearchPaymentMethod(in paymentMethodId int)
+		Begin
+			Select
+				Pm.idPaymentMethod,
+                Pm.nameMethod,
+                Pm.descriptionMethod
+                from PaymentMethods Pm where Pm.idPaymentMethod = paymentMethodId;
+        End$$	
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_DeletePaymentMethod(in paymentMethodId int)
+		Begin
+			Delete from PaymentMethods
+				where idPaymentMethod = paymentMethodId;
+        End$$
+Delimiter ;
+
+
+Delimiter $$
+	Create procedure sp_UpdatePaymentMethod(in paymentMethodId int,
+				in methodName varchar(150), in methodDescription varchar(150))
+		Begin
+			Update PaymentMethods Pm
+				Set Pm.nameMethod = methodName,
+                Pm.descriptionMethod = methodDescription
+					where Pm.idPaymentMethod = paymentMethodId;
+        End$$
+Delimiter ;
 
 
 
